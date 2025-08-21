@@ -1,0 +1,67 @@
+<div class="new-header-rohan-section" style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.5rem 0;">
+  <div class="header-col header-col--logo" style="flex: 1;">
+    {% if section.settings.logo != blank %}
+      <a href="{{ routes.root_url }}" class="header__logo-link" style="display: inline-block;">
+        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ section.settings.logo.alt | escape }}" style="max-height: 60px; width: auto;">
+      </a>
+    {% elsif section.settings.logo_text != blank %}
+      <a href="{{ routes.root_url }}" class="header__logo-text" style="font-size: 2rem; font-weight: bold; text-decoration: none; color: inherit;">
+        {{ section.settings.logo_text }}
+      </a>
+    {% endif %}
+  </div>
+  <div class="header-col header-col--announcement" style="flex: 2; text-align: center;">
+    {% if section.settings.announcement_text != blank %}
+      <span class="header__announcement" style="font-size: 1.1rem; color: #555;">
+        {{ section.settings.announcement_text }}
+      </span>
+    {% endif %}
+  </div>
+  <div class="header-col header-col--button" style="flex: 1; text-align: right;">
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="header__button" style="padding: 0.7em 1.5em; background: #222; color: #fff; border-radius: 4px; text-decoration: none; font-weight: 600;">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Header Rohan",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "info": "If logo image is not set, this text will be used."
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header Rohan"
+    }
+  ]
+}
+"enabled_on": { "groups": ["header"] }
+{% endschema %}
