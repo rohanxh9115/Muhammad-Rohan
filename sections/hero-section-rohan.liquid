@@ -5,102 +5,81 @@
   "settings": [
     {
       "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Find the perfect gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "header_button_text",
+      "label": "Header Button Text",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "header_button_link",
+      "label": "Header Button Link",
+      "default": "/"
+    },
+    {
+      "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Lorem ipsum dolor sit amet"
+      "label": "Main Heading",
+      "default": "The Gift Guide"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisl quis neque."
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
     },
     {
       "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Lorem Ipsum"
+      "id": "hero_button_text",
+      "label": "Hero Button Text",
+      "default": "SHOP NOW"
     },
     {
       "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
+      "id": "hero_button_link",
+      "label": "Hero Button Link",
       "default": "/"
     },
     {
       "type": "text",
-      "id": "bar_text",
-      "label": "Bar Text",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "id": "footer_text",
+      "label": "Footer Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
     },
     {
       "type": "color",
-      "id": "bar_bg_color",
-      "label": "Bar Background Color",
+      "id": "header_button_bg",
+      "label": "Header Button Background",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "header_button_text",
+      "label": "Header Button Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "hero_button_bg",
+      "label": "Hero Button Background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "hero_button_text",
+      "label": "Hero Button Text Color",
       "default": "#fff"
-    },
-    {
-      "type": "color",
-      "id": "bar_text_color",
-      "label": "Bar Text Color",
-      "default": "#000"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#000"
-    },
-    {
-      "type": "color",
-      "id": "description_color",
-      "label": "Description Color",
-      "default": "#222"
-    },
-    {
-      "type": "color",
-      "id": "button_bg_color",
-      "label": "Button Background Color",
-      "default": "#000"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button Text Color",
-      "default": "#fff"
-    },
-    {
-      "type": "select",
-      "id": "heading_alignment",
-      "label": "Heading Alignment",
-      "default": "left",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "description_alignment",
-      "label": "Description Alignment",
-      "default": "left",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "button_alignment",
-      "label": "Button Alignment",
-      "default": "left",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ]
     }
   ],
   "presets": [
@@ -111,90 +90,335 @@
 }
 {% endschema %}
 
-<div class="hero-section-rohan" style="background: #fff; padding: 0;">
-  <div class="hero-section-rohan__content" style="max-width: 700px; margin: 0 auto; padding: 60px 20px 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; color: {{ section.settings.heading_color }}; margin-bottom: 20px; text-align: {{ section.settings.heading_alignment }};">
-      {{ section.settings.heading }}
-    </h1>
-    <div class="hero-section-rohan__desc" style="font-size: 1.1rem; color: {{ section.settings.description_color }}; margin-bottom: 32px; text-align: {{ section.settings.description_alignment }};">
-      {{ section.settings.description }}
+<div class="hero-section-rohan">
+  <!-- Header Section -->
+  <header class="hero-header">
+    <div class="hero-header__container">
+      <div class="hero-header__brand">{{ section.settings.brand_name }}</div>
+      <div class="hero-header__tagline">{{ section.settings.tagline }}</div>
+      {% if section.settings.header_button_text != blank and section.settings.header_button_link != blank %}
+        <a href="{{ section.settings.header_button_link }}" class="hero-header__button">
+          {{ section.settings.header_button_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
     </div>
-    {% if section.settings.button_text != blank and section.settings.button_link != blank %}
-      <div style="text-align: {{ section.settings.button_alignment }};">
+  </header>
 
-      <a 
-        href="{{ section.settings.button_link }}" 
-        class="hero-section-rohan__button"
-        style="
-          display: inline-block;
-          padding: 0.9em 2.2em;
-          background: {{ section.settings.button_bg_color | default: '#222' }};
-          color: {{ section.settings.button_text_color | default: '#fff' }};
-          border-radius: 4px;
-          text-decoration: none;
-          font-weight: 600;
-          border: none;
-          transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        "
-        {% if section.settings.button_target_blank %}target="_blank" rel="noopener"{% endif %}
-      >
-        {{ section.settings.button_text }}
-      </a>
-      </div>
-    {% endif %}
-  </div>
-  
-  {% if section.settings.bar_text != blank %}
-    <div class="hero-section-rohan__bar" style="
-      background: {{ section.settings.bar_bg_color }};
-      color: {{ section.settings.bar_text_color }};
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-top: 1px solid rgba(0,0,0,0.05);
-    ">
-      {{ section.settings.bar_text }}
+  <!-- Hero Section with Background Illustration -->
+  <section class="hero-main">
+    <div class="hero-main__background">
+      <!-- SVG Background Illustration -->
+      <svg class="hero-illustration" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eyeglasses -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <ellipse cx="150" cy="80" rx="35" ry="15" fill="none" stroke="#000" stroke-width="1.5"/>
+          <ellipse cx="250" cy="80" rx="35" ry="15" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="185" y1="80" x2="215" y2="80" stroke="#000" stroke-width="1.5"/>
+          <line x1="120" y1="80" x2="130" y2="85" stroke="#000" stroke-width="1.5"/>
+          <line x1="280" y1="80" x2="270" y2="85" stroke="#000" stroke-width="1.5"/>
+        </g>
+        
+        <!-- Camera -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="50" y="120" width="60" height="40" rx="5" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="80" cy="140" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+          <rect x="55" y="125" width="50" height="30" rx="2" fill="none" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Map -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="40" y="180" width="80" height="60" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="50" y1="190" x2="70" y2="190" stroke="#000" stroke-width="1"/>
+          <line x1="50" y1="200" x2="75" y2="200" stroke="#000" stroke-width="1"/>
+          <line x1="50" y1="210" x2="65" y2="210" stroke="#000" stroke-width="1"/>
+          <line x1="50" y1="220" x2="80" y2="220" stroke="#000" stroke-width="1"/>
+          <line x1="50" y1="230" x2="70" y2="230" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Camera Lenses -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <circle cx="300" cy="100" r="20" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="300" cy="100" r="12" fill="none" stroke="#000" stroke-width="1"/>
+          <circle cx="350" cy="150" r="15" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="350" cy="150" r="8" fill="none" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Notebook -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="200" y="200" width="40" height="50" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="210" y1="210" x2="230" y2="210" stroke="#000" stroke-width="1"/>
+          <line x1="210" y1="220" x2="230" y2="220" stroke="#000" stroke-width="1"/>
+          <line x1="210" y1="230" x2="225" y2="230" stroke="#000" stroke-width="1"/>
+          <line x1="210" y1="240" x2="230" y2="240" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Pen -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <line x1="250" y1="190" x2="250" y2="220" stroke="#000" stroke-width="2"/>
+          <polygon points="250,190 245,185 255,185" fill="none" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Compass -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <circle cx="400" cy="80" r="25" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="400" y1="55" x2="400" y2="105" stroke="#000" stroke-width="1.5"/>
+          <line x1="375" y1="80" x2="425" y2="80" stroke="#000" stroke-width="1.5"/>
+          <circle cx="400" cy="80" r="3" fill="#000"/>
+        </g>
+        
+        <!-- Vintage Camera -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="500" y="100" width="80" height="60" rx="10" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="540" cy="130" r="15" fill="none" stroke="#000" stroke-width="1.5"/>
+          <rect x="520" y="110" width="40" height="40" rx="5" fill="none" stroke="#000" stroke-width="1"/>
+          <line x1="580" y1="120" x2="600" y2="120" stroke="#000" stroke-width="1.5"/>
+          <line x1="580" y1="130" x2="600" y2="130" stroke="#000" stroke-width="1.5"/>
+          <line x1="580" y1="140" x2="600" y2="140" stroke="#000" stroke-width="1.5"/>
+        </g>
+        
+        <!-- Film Rolls -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <circle cx="550" cy="200" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="570" cy="200" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="590" cy="200" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+        </g>
+        
+        <!-- Passport -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="650" y="120" width="50" height="35" fill="none" stroke="#000" stroke-width="1.5"/>
+          <circle cx="675" cy="137" r="8" fill="none" stroke="#000" stroke-width="1"/>
+          <path d="M670 132 L675 137 L680 132" fill="none" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Watch -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <circle cx="100" cy="300" r="20" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="100" y1="280" x2="100" y2="290" stroke="#000" stroke-width="1.5"/>
+          <line x1="100" y1="310" x2="100" y2="320" stroke="#000" stroke-width="1.5"/>
+          <line x1="80" y1="300" x2="90" y2="300" stroke="#000" stroke-width="1.5"/>
+          <line x1="110" y1="300" x2="120" y2="300" stroke="#000" stroke-width="1.5"/>
+          <circle cx="100" cy="300" r="2" fill="#000"/>
+        </g>
+        
+        <!-- Stopwatch -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <circle cx="200" cy="320" r="18" fill="none" stroke="#000" stroke-width="1.5"/>
+          <line x1="200" y1="302" x2="200" y2="310" stroke="#000" stroke-width="1.5"/>
+          <line x1="200" y1="302" x2="205" y2="305" stroke="#000" stroke-width="1.5"/>
+          <circle cx="200" cy="320" r="2" fill="#000"/>
+        </g>
+        
+        <!-- Belt -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <rect x="700" y="250" width="80" height="8" rx="4" fill="none" stroke="#000" stroke-width="1.5"/>
+          <rect x="720" y="245" width="20" height="18" rx="3" fill="none" stroke="#000" stroke-width="1.5"/>
+          <rect x="725" y="250" width="10" height="8" fill="none" stroke="#000" stroke-width="1"/>
+        </g>
+        
+        <!-- Rope -->
+        <g class="illustration-item" style="opacity: 0.8;">
+          <path d="M50 350 Q60 340 70 350 Q80 360 90 350 Q100 340 110 350" fill="none" stroke="#000" stroke-width="2"/>
+        </g>
+      </svg>
     </div>
-  {% endif %}
+    
+    <div class="hero-main__content">
+      <h1 class="hero-main__heading">{{ section.settings.heading }}</h1>
+      <p class="hero-main__description">{{ section.settings.description }}</p>
+      {% if section.settings.hero_button_text != blank and section.settings.hero_button_link != blank %}
+        <a href="{{ section.settings.hero_button_link }}" class="hero-main__button">
+          {{ section.settings.hero_button_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="hero-footer">
+    <p class="hero-footer__text">{{ section.settings.footer_text }}</p>
+  </footer>
 </div>
 
 <style>
-  .hero-section-rohan__button:hover {
-    background: {{ section.settings.button_bg_color | color_darken: 10 }} !important;
+  .hero-section-rohan {
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header Styles */
+  .hero-header {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .hero-header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .hero-header__brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .hero-header__tagline {
+    font-size: 0.9rem;
+    color: #000;
+    text-align: center;
+    flex: 1;
+  }
+
+  .hero-header__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: {{ section.settings.header_button_bg }};
+    color: {{ section.settings.header_button_text }};
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .hero-header__button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-  
-  .hero-section-rohan__button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+
+  /* Hero Main Section */
+  .hero-main {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 60px 20px;
   }
-  
+
+  .hero-main__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .hero-illustration {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+  }
+
+  .hero-main__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-main__heading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .hero-main__description {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 32px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .hero-main__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    background: {{ section.settings.hero_button_bg }};
+    color: {{ section.settings.hero_button_text }};
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .hero-main__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Footer */
+  .hero-footer {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .hero-footer__text {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+  }
+
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .hero-section-rohan__content {
-      padding: 40px 16px 30px 16px !important;
+    .hero-header__container {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
     }
-    
-    .hero-section-rohan__content h1 {
-      font-size: 2rem !important;
-      margin-bottom: 16px !important;
+
+    .hero-header__tagline {
+      order: -1;
     }
-    
-    .hero-section-rohan__desc {
-      font-size: 1rem !important;
-      margin-bottom: 24px !important;
+
+    .hero-main {
+      padding: 40px 20px;
     }
-    
-    .hero-section-rohan__button {
-      padding: 0.8em 1.8em !important;
-      font-size: 0.95rem !important;
+
+    .hero-main__heading {
+      font-size: 2.5rem;
     }
-    
-    .hero-section-rohan__bar {
-      padding: 10px 16px !important;
-      font-size: 0.85rem !important;
+
+    .hero-main__description {
+      font-size: 1rem;
+    }
+
+    .hero-main__button {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-main__heading {
+      font-size: 2rem;
+    }
+
+    .hero-main__description {
+      font-size: 0.9rem;
     }
   }
 </style>
