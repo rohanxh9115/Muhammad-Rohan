@@ -1,0 +1,202 @@
+{% comment %} INSERT_YOUR_CODE {% endcomment %}
+{% schema %}
+{
+  "name": "Hero Section Rohan",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam massa nisl quis neque."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Lorem Ipsum"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "bar_text",
+      "label": "Bar Text",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "type": "color",
+      "id": "bar_bg_color",
+      "label": "Bar Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bar_text_color",
+      "label": "Bar Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "description_alignment",
+      "label": "Description Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "label": "Button Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section Rohan"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="hero-section-rohan" style="background: #fff; padding: 0;">
+  <div class="hero-section-rohan__content" style="max-width: 700px; margin: 0 auto; padding: 60px 20px 40px 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; color: {{ section.settings.heading_color }}; margin-bottom: 20px; text-align: {{ section.settings.heading_alignment }};">
+      {{ section.settings.heading }}
+    </h1>
+    <div class="hero-section-rohan__desc" style="font-size: 1.1rem; color: {{ section.settings.description_color }}; margin-bottom: 32px; text-align: {{ section.settings.description_alignment }};">
+      {{ section.settings.description }}
+    </div>
+    {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+      <div style="text-align: {{ section.settings.button_alignment }};">
+
+      <a 
+        href="{{ section.settings.button_link }}" 
+        class="hero-section-rohan__button"
+        style="
+          display: inline-block;
+          padding: 0.9em 2.2em;
+          background: {{ section.settings.button_bg_color | default: '#222' }};
+          color: {{ section.settings.button_text_color | default: '#fff' }};
+          border-radius: 4px;
+          text-decoration: none;
+          font-weight: 600;
+          border: none;
+          transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        "
+        {% if section.settings.button_target_blank %}target="_blank" rel="noopener"{% endif %}
+      >
+        {{ section.settings.button_text }}
+      </a>
+      </div>
+    {% endif %}
+  </div>
+  
+  {% if section.settings.bar_text != blank %}
+    <div class="hero-section-rohan__bar" style="
+      background: {{ section.settings.bar_bg_color }};
+      color: {{ section.settings.bar_text_color }};
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    ">
+      {{ section.settings.bar_text }}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .hero-section-rohan__button:hover {
+    background: {{ section.settings.button_bg_color | color_darken: 10 }} !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  }
+  
+  .hero-section-rohan__button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-section-rohan__content {
+      padding: 40px 16px 30px 16px !important;
+    }
+    
+    .hero-section-rohan__content h1 {
+      font-size: 2rem !important;
+      margin-bottom: 16px !important;
+    }
+    
+    .hero-section-rohan__desc {
+      font-size: 1rem !important;
+      margin-bottom: 24px !important;
+    }
+    
+    .hero-section-rohan__button {
+      padding: 0.8em 1.8em !important;
+      font-size: 0.95rem !important;
+    }
+    
+    .hero-section-rohan__bar {
+      padding: 10px 16px !important;
+      font-size: 0.85rem !important;
+    }
+  }
+</style>
+
+

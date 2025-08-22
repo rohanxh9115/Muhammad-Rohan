@@ -1,29 +1,60 @@
 {% comment %}creating a new header for the shopify store{% endcomment %}
-<div class="new-header-rohan-section" style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.5rem 0;">
-  <div class="header-col header-col--logo" style="flex: 1;">
-    {% if section.settings.logo != blank %}
-      <a href="{{ routes.root_url }}" class="header__logo-link" style="display: inline-block;">
-        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ section.settings.logo.alt | escape }}" style="max-height: 60px; width: auto;">
-      </a>
-    {% elsif section.settings.logo_text != blank %}
-      <a href="{{ routes.root_url }}" class="header__logo-text" style="font-size: 2rem; font-weight: bold; text-decoration: none; color: inherit;">
-        {{ section.settings.logo_text }}
-      </a>
-    {% endif %}
-  </div>
-  <div class="header-col header-col--announcement" style="flex: 2; text-align: center;">
-    {% if section.settings.announcement_text != blank %}
-      <span class="header__announcement" style="font-size: 1.1rem; color: #555;">
-        {{ section.settings.announcement_text }}
-      </span>
-    {% endif %}
-  </div>
-  <div class="header-col header-col--button" style="flex: 1; text-align: right;">
-    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-      <a href="{{ section.settings.button_link }}" class="header__button" style="padding: 0.7em 1.5em; background: #222; color: #fff; border-radius: 4px; text-decoration: none; font-weight: 600;">
-        {{ section.settings.button_label }}
-      </a>
-    {% endif %}
+<style>
+  .header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header__button {
+    padding: 0.7em 1.5em;
+    background: {{ section.settings.button_bg_color | default: '#222' }};
+    color: {{ section.settings.button_text_color | default: '#fff' }};
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    transition: 
+      background 0.2s, 
+      color 0.2s, 
+      box-shadow 0.2s, 
+      transform 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: inline-block;
+  }
+  .header__button:hover, .header__button:focus {
+    background: {{ section.settings.button_bg_color_hover | default: '#111' }};
+    color: {{ section.settings.button_text_color_hover | default: '#fff' }};
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-2px) scale(1.03);
+    text-decoration: none;
+  }
+</style>
+
+<div style="width: 100%; background: #fff;">
+  <div class="header__container">
+    <!-- Example: logo/announcement/other header content here -->
+    <div class="header-col header-col--logo" style="flex: 1;">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="Logo" style="height: 40px;">
+      {% elsif section.settings.logo_text != blank %}
+        <span style="font-size: 1.5rem; font-weight: 700;">{{ section.settings.logo_text }}</span>
+      {% endif %}
+    </div>
+    <div class="header-col header-col--announcement" style="flex: 2; text-align: center;">
+      {% if section.settings.announcement_text != blank %}
+        <span style="font-size: 1rem; color: #444;">{{ section.settings.announcement_text }}</span>
+      {% endif %}
+    </div>
+    <div class="header-col header-col--button" style="flex: 1; text-align: right;">
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="header__button">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -59,6 +90,30 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color_hover",
+      "label": "Button Background Color (Hover)",
+      "default": "#111"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color_hover",
+      "label": "Button Text Color (Hover)",
+      "default": "#fff"
     }
   ],
   "presets": [
@@ -66,5 +121,5 @@
       "name": "Custom Header Rohan"
     }
   ]
-}  
+}
 {% endschema %}
